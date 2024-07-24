@@ -1,24 +1,32 @@
 let processButton = document.getElementById('processButton')
 let textArea = document.getElementById('questionInput')
+let dropdownQuestion = document.querySelectorAll('.dropdown-item')
+let dropdownVariant = document.querySelectorAll('.dropdown-v')
 let questions = []
-let ques = [
-	'Savol 1',
-	'Savol 2',
-	'Savol 3',
-	'Savol 4',
-	'Savol 5',
-	'Savol 6',
-	'Savol 7',
-	'Savol 8',
-	'Savol 9',
-	'Savol 10',
-]
-let fromUp = questions
+let selectedVariant = 5
+let selectedCount = 5
 
-// let downloadButton = document.getElementById('downloadButton')
+//
+// Dropdown question data
+dropdownQuestion.forEach(item => {
+	item.addEventListener('click', function (event) {
+		event.preventDefault()
+		selectedCount = parseInt(this.getAttribute('data-value'), 10)
+		// console.log('Selected count:', selectedCount) // Tanlangan qiymatni tekshirish
+	})
+})
+// Dropdown variant data
+dropdownVariant.forEach(item => {
+	item.addEventListener('click', function (event) {
+		event.preventDefault()
+		selectedVariant = parseInt(this.getAttribute('data-value'), 10)
+		// console.log('Selected count:', selectedVariant)
+		//
+	})
+})
 
-processButton.addEventListener('click', function () {
-	// Textarea'dagi ma'lumotlarni olish
+// textArea dagi malumotlarni olish
+processButton.addEventListener('click', () => {
 	let input = textArea.value
 	let lines = input.split('\n')
 	let currentQuestion = null
@@ -47,66 +55,22 @@ processButton.addEventListener('click', function () {
 			})
 		}
 	})
-
 	// Oxirgi savolni qo'shish
 	if (currentQuestion) {
 		questions.push(currentQuestion)
 	}
-
-	// Natijani oddiy string ko'rinishida saqlash
-	let A = JSON.stringify(questions, null, 2)
-
-	// Konsolga chiqarish
-	// console.log(A)
-
-	// Savollar sonini tekshirish
-	if (questions.length < selectedCount) {
-		alert(`Siz ${questions.length} ta savol kiritdingiz`)
-	}
 	// =====================generate call
-	generateVariantFunction(fromUp)
-	// ========================================================
-
-	// questions.map(e => {
-	// 	// console.log(e)
-	// 	console.log(`${e.question}
-	//                    ${e.options[0].text}
-	// 				 ${e.options[1].text}
-	// 				 ${e.options[2].text}
-	// 				 ${e.options[3].text}`)
-	// })
+	// if (selectedVariant === 0) {
+	// 	alert('Variantlar sonini tanlang')
+	// } else if (selectedCount === 0) {
+	// 	alert('Savollar sonini tanlang')
+	// } else {
+	// }
+	generateVariantFunction(questions, selectedVariant, selectedCount)
 })
-// ------------------------------------------------------------------processButton end
-
-// Dropdown question data
-let selectedCount = 0
-let dropdownItems = document.querySelectorAll('.dropdown-item')
-dropdownItems.forEach(item => {
-	item.addEventListener('click', function (event) {
-		event.preventDefault()
-		selectedCount = parseInt(this.getAttribute('data-value'), 10)
-		// console.log('Selected count:', selectedCount)
-	})
-})
-// Dropdown variant data
-let selectedVariant = 0
-let dropdownVariant = document.querySelectorAll('.dropdown-v')
-dropdownVariant.forEach(item => {
-	item.addEventListener('click', function (event) {
-		event.preventDefault()
-		selectedVariant = parseInt(this.getAttribute('data-value'), 10)
-		seceltedV()
-	})
-})
-function seceltedV(e) {
-	// console.log('Selected variant:', selectedVariant)
-}
-
 // -----------------------------------------------------------------------GENERATE
-// 10 ta savol
 
-// generate array items
-function generateVariantFunction(e_arr) {
+function generateVariantFunction(e_arr, numVariants, selectedCount) {
 	let shuffleArray = array => {
 		let shuffled = array.slice() // Original massivni nusxalash
 		for (let i = shuffled.length - 1; i > 0; i--) {
@@ -116,21 +80,27 @@ function generateVariantFunction(e_arr) {
 		return shuffled
 	}
 
-	// 10 xil variant yaratish
-	let generateVariants = (e_arr, numVariants) => {
+	// Variantlarni yaratish
+	let generateVariants = (e_arr, numVariants, questionsNumber) => {
 		let variants = []
 		for (let i = 0; i < numVariants; i++) {
-			variants.push(shuffleArray(e_arr))
+			let shuffledQuestions = shuffleArray(e_arr).slice(0, questionsNumber)
+			let variant = shuffledQuestions.map(question => ({
+				question: question.question,
+				options: shuffleArray(question.options), // Variantlarni ham tasodifiy tartibda
+			}))
+			variants.push(variant)
 		}
 		return variants
 	}
 
-	// numVariants xil variant
-	let numVariants = 10
-	let variantsCall = generateVariants(e_arr, numVariants)
+	// Variantlarni yaratish va natijani ko'rsatish
+	let variantsCall = generateVariants(e_arr, numVariants, selectedCount)
 
-	// Natijani ko'rsatish
 	variantsCall.forEach((variant, index) => {
-		console.log(variant[0], index)
+		console.log(variant[0].question, variant[0].options)
 	})
 }
+
+// =================================================================
+// --===============================================================
