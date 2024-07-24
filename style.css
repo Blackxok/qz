@@ -1,0 +1,8 @@
+.btns {
+	margin-bottom: 20px;
+	min-width: min-content;
+}
+#dropdownMenuButton1,
+#dropdownMenuButton2 {
+	min-width: min-content;
+}
