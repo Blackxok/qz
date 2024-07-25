@@ -14,7 +14,7 @@
 </head>
 
 <body>
-	<div class="container mt-5">
+	<section class="container mt-5">
 		<div class="row-12 d-flex justify-content-between btns">
 			<div class="col-md-6 w-50">
 				<!-- First Dropdown Menu -->
@@ -53,13 +53,13 @@
 				<textarea id="questionInput" class="form-control" rows="15"
 					placeholder="Enter your questions and options. Use * to mark the correct option."></textarea>
 				<button id="processButton" class="btn btn-primary mt-3">Process</button>
-				<button id="downloadButton" class="btn btn-success mt-3">Download Data</button>
+				<button id="downloadButton" class="btn btn-success mt-3" onclick="downloadAsPDF()">Download Data</button>
 			</div>
 		</div>
 		<div class="row">
-			<div id="questionsContainer"></div>
+			<div id="questions-container"></div>
 		</div>
-	</div>
+	</section>
 
 	<!-- Bootstrap JS and dependencies -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
@@ -68,6 +68,9 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
+	<!-- for pdf  -->
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script> -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 	<!-- js links -->
 	<script src="./data.js"></script>
 	<script src="./main.js"></script>
@@ -76,54 +79,54 @@
 </html>
 
 <!-- 
-Savol 1) 1+2
-- Variant 1
-- Variant 3 *
-- Variant 3 
-- Variant 4
-Savol 2) 2+3
-- Variant 1
-- Variant 5 *
-- Variant 3 
-- Variant 4
-Savol 3) 4+5
-- Variant 1
-- Variant 9 *
-- Variant 3 
-- Variant 4
-Savol 4) 5+7
-- Variant 1
-- Variant 12 *
-- Variant 3 
-- Variant 4
-Savol 5) 9+7
-- Variant 1
-- Variant 16 *
-- Variant 3 
-- Variant 4
-Savol 6) 10-8
-- Variant 1
-- Variant 2 *
-- Variant 3 
-- Variant 4
-Savol 7) 98-41
-- Variant 1
-- Variant 57 *
-- Variant 3 
-- Variant 4
-Savol 8) 45-8
-- Variant 1
-- Variant 37 *
-- Variant 3 
-- Variant 4
-Savol 9) 23*2
-- Variant 1
-- Variant 46 *
-- Variant 3 
-- Variant 4
-Savol 10) 78/3
-- Variant 1
-- Variant 26 *
-- Variant 3 
-- Variant 4
+Savol 1+2
+- A) 1
+- B) 3 *
+- C) 3 
+- D) 4
+Savol 2+3
+- A) 1
+- B) 5 *
+- C) 3 
+- D) 4
+Savol 4+5
+- A) 1
+- B) 9 *
+- C) 3 
+- D) 4
+Savol 5+7
+- A) 1
+- B) 12 *
+- C) 3 
+- D) 4
+Savol 9+7
+- A) 1
+- B) 16 *
+- C) 3 
+- D) 4
+Savol 10-8
+- A) 1
+- B) 2 *
+- C) 3 
+- D) 4
+Savol 98-41
+- A) 1
+- B) 57 *
+- C) 3 
+- D) 4
+Savol 45-8
+- A) 1
+- B) 37 *
+- C) 3 
+- D) 4
+Savol 23*2
+- A) 1
+- B) 46 *
+- C) 3 
+- D) 4
+Savol 78/3
+- A) 1
+- B) 26 *
+- D) 3 
+- C) 4
 -->
