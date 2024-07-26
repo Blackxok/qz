@@ -1,166 +1,4 @@
-// let processButton = document.getElementById('processButton')
-// let textArea = document.getElementById('questionInput')
-// let dropdownQuestion = document.querySelectorAll('.dropdown-item')
-// let dropdownVariant = document.querySelectorAll('.dropdown-v')
-// let questionsContainer = document.getElementById('questions-container')
-// let downloadButton = document.getElementById('downloadButton')
-// let questions = []
-// let selectedVariant = 0
-// let selectedCount = 0
-
-// //
-// // Dropdown question data
-// dropdownQuestion.forEach(item => {
-// 	item.addEventListener('click', function (event) {
-// 		event.preventDefault()
-// 		selectedCount = parseInt(this.getAttribute('data-value'), 10)
-// 		// console.log('Selected count:', selectedCount) // Tanlangan qiymatni tekshirish
-// 	})
-// })
-// // Dropdown variant data
-// dropdownVariant.forEach(item => {
-// 	item.addEventListener('click', function (event) {
-// 		event.preventDefault()
-// 		selectedVariant = parseInt(this.getAttribute('data-value'), 10)
-// 		// console.log('Selected count:', selectedVariant)
-// 	})
-// })
-
-// // textArea dagi malumotlarni olish
-// processButton.addEventListener('click', () => {
-// 	let input = textArea.value
-// 	let lines = input.split('\n')
-// 	let currentQuestion = null
-
-// 	// Har bir qator bo'ylab
-// 	lines.forEach(line => {
-// 		line = line.trim()
-// 		if (line === '') {
-// 			return // Bo'sh qatorlarni o'tkazib yuborish
-// 		}
-// 		if (!line.startsWith('-')) {
-// 			// Yangi savol
-// 			if (currentQuestion) {
-// 				questions.push(currentQuestion)
-// 			}
-// 			currentQuestion = {
-// 				question: line,
-// 				options: [],
-// 			}
-// 		} else {
-// 			// To'g'ri savol uchun variant
-// 			let isCorrect = line.includes('*')
-// 			currentQuestion.options.push({
-// 				text: line.replace('*', '').trim(),
-// 				correct: isCorrect,
-// 			})
-// 		}
-// 	})
-// 	// Oxirgi savolni qo'shish
-// 	if (currentQuestion) {
-// 		questions.push(currentQuestion)
-// 	}
-// 	// =====================generate call
-// 	if (selectedVariant === 0) {
-// 		alert('Variantlar sonini tanlang')
-// 	} else if (selectedCount === 0) {
-// 		alert('Savollar sonini tanlang')
-// 	} else {
-// 		generateVariantFunction(questions, selectedVariant, selectedCount)
-// 	}
-// })
-// // -----------------------------------------------------------------------GENERATE
-// function generateVariantFunction(e_arr, numVariants, selectedCount) {
-// 	let shuffleArray = array => {
-// 		let shuffled = array.slice() // Original massivni nusxalash
-// 		for (let i = shuffled.length - 1; i > 0; i--) {
-// 			let j = Math.floor(Math.random() * (i + 1))
-// 			;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]] // Elementlarni almashish
-// 		}
-// 		return shuffled
-// 	}
-
-// 	// Variantlarni yaratish
-// 	let generateVariants = (e_arr, numVariants, questionsNumber) => {
-// 		let variants = []
-// 		for (let i = 0; i < numVariants; i++) {
-// 			let shuffledQuestions = shuffleArray(e_arr).slice(0, questionsNumber)
-// 			let variant = shuffledQuestions.map(question => ({
-// 				question: question.question,
-// 				options: shuffleArray(question.options), // Variantlarni ham tasodifiy tartibda
-// 			}))
-// 			variants.push(variant)
-// 		}
-// 		return variants
-// 	}
-
-// 	// Variantlarni yaratish va natijani ko'rsatish
-// 	let variantsCall = generateVariants(e_arr, numVariants, selectedCount)
-// 	// =================================================================
-// 	// --===============================================================
-
-// 	variantsCall.forEach((variant, index) => {
-// 		// Variant uchun quti yaratish
-// 		const card = document.createElement('div')
-// 		card.className = 'question-card'
-
-// 		// Variantning birinchi savolini yaratish
-// 		card.textContent = `${index + 1} - ${variant[0].question}`
-
-// 		// Variantning birinchi savolining variantlarini yaratish
-// 		const olOptions = document.createElement('ol')
-
-// 		variant[0].options.forEach(option => {
-// 			const liOption = document.createElement('li')
-// 			liOption.textContent = option.text
-// 			olOptions.appendChild(liOption)
-// 		})
-
-// 		card.appendChild(olOptions)
-// 		questionsContainer.appendChild(card)
-// 		// -----------if page full add new page
-// 	})
-// }
-// // =================================================================
-// // --===============================================================
-// downloadButton.addEventListener('click', () => {
-// 	downloadAsPDF()
-// 	console.log('function working')
-// })
-// function downloadAsPDF() {
-// 	// QUESTIONS tagi ichidagi kontentni olish
-// 	const element = document.getElementById('questions-container')
-
-// 	// PDF opsiyalarini sozlash
-// 	var opt = {
-// 		margin: 0.5,
-// 		filename: 'questions.pdf',
-// 		image: { type: 'jpeg', quality: 0.98 },
-// 		html2canvas: { scale: 2, logging: true, letterRendering: true },
-// 		jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
-// 	}
-
-// 	// HTML2PDF funksiyasini chaqirish
-// 	html2pdf().from(element).set(opt).save()
-// }
-// DOM elementlarini tanlash
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+let trueOption = []
 const processButton = document.getElementById('processButton')
 const textArea = document.getElementById('questionInput')
 const dropdownQuestionItems = document.querySelectorAll('.dropdown-item')
@@ -189,7 +27,6 @@ function setupDropdownListeners() {
 		})
 	})
 }
-
 // TextArea'dan ma'lumotlarni olish va qayta ishlash
 function processTextAreaInput() {
 	const input = textArea.value
@@ -214,7 +51,6 @@ function processTextAreaInput() {
 
 	if (currentQuestion) questions.push(currentQuestion)
 }
-
 // Massivni tasodifiy tartibda aralashtirish
 function shuffleArray(array) {
 	const shuffled = array.slice()
@@ -225,8 +61,13 @@ function shuffleArray(array) {
 	return shuffled
 }
 
-// Variantlarni yaratish
+// Variantlarni yaratish va savollar o'rnini tasodifiy tarzda o'zgartirish
 function generateVariants(questions, variantCount, questionCount) {
+	if (questionCount > questions.length) {
+		console.error('Savollar soni variantdagi savollar sonidan kam.')
+		return []
+	}
+
 	const variants = []
 	for (let i = 0; i < variantCount; i++) {
 		const shuffledQuestions = shuffleArray(questions).slice(0, questionCount)
@@ -245,16 +86,25 @@ function renderVariants(variants) {
 	variants.forEach((variant, index) => {
 		const card = document.createElement('div')
 		card.className = 'question-card'
-		card.textContent = `${index + 1} - ${variant[0].question}`
+		card.textContent = `Variant ${index + 1}`
 
-		const olOptions = document.createElement('ol')
-		variant[0].options.forEach(option => {
-			const liOption = document.createElement('li')
-			liOption.textContent = option.text
-			olOptions.appendChild(liOption)
+		const OptionsCon = document.createElement('div')
+		variant.forEach((question, i) => {
+			const ulQuestion = document.createElement('ul')
+			ulQuestion.textContent = `${i + 1}: ${question.question}`
+			OptionsCon.appendChild(ulQuestion)
+
+			question.options.forEach(option => {
+				const liOption = document.createElement('li')
+				liOption.textContent = option.text
+				if (option.correct) {
+					trueOption.push(option.text)
+				}
+				ulQuestion.appendChild(liOption)
+			})
 		})
 
-		card.appendChild(olOptions)
+		card.appendChild(OptionsCon)
 		questionsContainer.appendChild(card)
 	})
 }
@@ -289,9 +139,23 @@ function generateVariantFunction() {
 		selectedVariantCount,
 		selectedQuestionCount
 	)
+
 	renderVariants(variants)
+}
+// chech input Area
+function checkInputArea() {
+	generateVariantFunction()
+	if (questions.length < selectedQuestionCount) {
+		alert(`${questions.length}-ta savol kiritdingiz!!!`)
+	}
+	console.log(questions.length)
+	questions.length = 0
+	console.log(questions.length)
 }
 // Event listener'larni o'rnatish
 setupDropdownListeners()
-processButton.addEventListener('click', generateVariantFunction)
+
+processButton.addEventListener('click', checkInputArea)
 downloadButton.addEventListener('click', downloadAsPDF)
+
+console.log(trueOption)

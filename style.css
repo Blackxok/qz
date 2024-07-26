@@ -14,20 +14,24 @@
 	margin-top: 20px;
 	padding: 0 10px;
 }
+#questionInput::placeholder {
+	color: darkgray;
+	opacity: 0.5;
+}
 .question-card {
 	background-color: #f9f9f9;
 	padding: 10px;
 	border-radius: 5px;
 	box-sizing: border-box;
-	page-break-inside: avoid !important;
 }
 
-ol {
+ul {
 	list-style-type: none;
 	padding: 0;
-	page-break-inside: avoid;
+	page-break-inside: avoid !important;
 }
-ol li {
-	page-break-inside: avoid;
+li {
+	list-style-type: none;
+	page-break-inside: avoid !important;
 }
 /* --------------------------------------- */
