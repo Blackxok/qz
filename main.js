@@ -5,6 +5,8 @@ const dropdownQuestionItems = document.querySelectorAll('.dropdown-item')
 const dropdownVariantItems = document.querySelectorAll('.dropdown-v')
 const questionsContainer = document.getElementById('questions-container')
 const downloadButton = document.getElementById('downloadButton')
+const dropdownMenuButton1 = document.getElementById('dropdownMenuButton1')
+const dropdownMenuButton2 = document.getElementById('dropdownMenuButton2')
 
 // Global o'zgaruvchilar
 let questions = []
@@ -142,16 +144,29 @@ function generateVariantFunction() {
 
 	renderVariants(variants)
 }
+
 // chech input Area
 function checkInputArea() {
 	generateVariantFunction()
 	if (questions.length < selectedQuestionCount) {
 		alert(`${questions.length}-ta savol kiritdingiz!!!`)
 	}
-	console.log(questions.length)
+
 	questions.length = 0
-	console.log(questions.length)
+	// ----------------------------------------------
 }
+// ----------------------------------------------
+dropdownQuestionItems.forEach(item => {
+	item.addEventListener('click', function () {
+		dropdownMenuButton1.innerText = this.innerText
+	})
+})
+dropdownVariantItems.forEach(item => {
+	item.addEventListener('click', function () {
+		dropdownMenuButton2.innerText = this.innerText
+	})
+})
+
 // Event listener'larni o'rnatish
 setupDropdownListeners()
 
